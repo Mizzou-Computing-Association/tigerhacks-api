@@ -8,5 +8,8 @@ test:
 lint:
 	flask lint
 
-db:
-	docker run --name th_api_db -e MYSQL_ROOT_PASSWORD=tigerhacks2020 mysql:latest
+run-db:
+	docker run -p 3307:3306 --name th_api_db tigerhacks-api/dev-db
+
+build-db:
+	docker build -f docker/database/Dockerfile -t tigerhacks-api/dev-db .

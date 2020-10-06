@@ -4,12 +4,9 @@
 import logging
 
 import pytest
-from webtest import TestApp
 
 from tigerhacks_api.app import create_app
 from tigerhacks_api.database import db as _db
-
-from .factories import UserFactory
 
 
 @pytest.fixture
@@ -43,11 +40,3 @@ def db(app):
     # Explicitly close DB connection
     _db.session.close()
     _db.drop_all()
-
-
-@pytest.fixture
-def user(db):
-    """Create user for the tests."""
-    user = UserFactory(password="myprecious")
-    db.session.commit()
-    return user

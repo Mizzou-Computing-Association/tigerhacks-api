@@ -1,0 +1,9 @@
+/tigerhacks_api/ @ccarterlandis
+/tests/ @ccarterlandis
+/docker/ @ccarterlandis
+/schema/ @ccarterlandis
+
+/Makefile @ccarterlandis
+/requirements.txt @ccarterlandis
+/setup.cfg @ccarterlandis
+/autoapp.py @ccarterlandis
