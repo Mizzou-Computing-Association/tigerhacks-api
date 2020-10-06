@@ -23,13 +23,13 @@ blueprint = Blueprint("admin", __name__, url_prefix="/admin")
 @blueprint.route("/status", methods=["GET"])
 @blueprint.route("/ping", methods=["GET"])
 @blueprint.route("/", methods=["GET"])
-def home():
+def admin_home():
     return Response(
-        response=json.dumps({"status": "OK", "admin": "true"}), status=200, mimetype="application/json"
+        response=json.dumps({"status": "OK", "is_admin": "true"}), status=200, mimetype="application/json"
     )
 
 @blueprint.route("/registrations", methods=["GET"])
-def register():
+def registrations():
     result = pd.read_sql(s.sql.text("""
         SELECT * FROM registrations
     """), current_app.db_engine)

@@ -9,7 +9,7 @@ lint:
 	flask lint
 
 run-db:
-	docker run -p 3307:3306 --name th_api_db tigerhacks-api/dev-db
+	docker run -p 3307:3306 --name th_api_dev_db tigerhacks_api/dev_db
 
 build-db:
-	docker build -f docker/database/Dockerfile -t tigerhacks-api/dev-db .
+	docker build -f docker/database/Dockerfile -t tigerhacks_api/dev_db .
