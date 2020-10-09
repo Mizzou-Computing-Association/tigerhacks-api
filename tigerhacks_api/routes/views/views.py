@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import sqlalchemy as s
 
 from flask import (
     Blueprint,
@@ -29,6 +30,21 @@ def home():
 
 @blueprint.route("/register", methods=["POST"])
 def register():
-    return Response(
-        response=json.dumps({"status": "NOT IMPLEMENTED"}), status=501, mimetype="application/json"
-    )
+    register_query = s.sql.text("""
+        INSERT INTO
+        `registrations`
+            (`first_name`, `last_name`, `school`, `year`, `major`, `shirt_size`, `mailing_address`)
+        VALUES
+            (:first_name, :last_name, :school, :year, :major, :shirt_size, :mailing_address);
+
+    """)
+
+    try:
+        current_app.db_engine.execute(register_query, **request.json)
+        return Response(
+            response=json.dumps({"status": "successful"}), status=200, mimetype="application/json"
+        )
+    except Exception as e:
+        return Response(
+            response=json.dumps({"status": "error", "msg": str(e)}), status=500, mimetype="application/json"
+        )

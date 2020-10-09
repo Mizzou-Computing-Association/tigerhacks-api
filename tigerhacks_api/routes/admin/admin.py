@@ -35,5 +35,6 @@ def registrations():
     """), current_app.db_engine)
     response = result.to_json(orient='records', date_format='iso', date_unit='ms')
     return Response(
-        response=response, status=501, mimetype="application/json"
+        response=response, status=200, mimetype="application/json"
     )
+
