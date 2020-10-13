@@ -4,6 +4,7 @@ import logging
 import sys
 
 from flask import Flask, render_template
+from flask_cors import CORS
 import sqlalchemy as s
 
 from tigerhacks_api import commands, routes
@@ -40,6 +41,7 @@ def create_app(config_object="tigerhacks_api.settings"):
     logger.info("API keys configured")
 
     logger.info("Request logs will now take over.")
+    CORS(app)
     return app
 
 
