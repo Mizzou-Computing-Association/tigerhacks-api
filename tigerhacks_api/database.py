@@ -19,6 +19,6 @@ def init_database_connection(app):
         return engine
     except s.exc.OperationalError as e:
         logger.error("Unable to connect to the database. Terminating...")
-        raise(e)
+        exit()
 
     return engine
