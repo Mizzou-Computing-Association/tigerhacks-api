@@ -42,9 +42,11 @@ SEND_FILE_MAX_AGE_DEFAULT=0
 
 #### Database (development)
 
+Below are the make commands for interacting with the database container.
+
 ```bash
 
-# start the database container
+# start the database container in the background
 $ make db
 
 # stop the database container
@@ -59,28 +61,6 @@ $ make refresh-db;
 
 #### API Keys
 
-All requests must include a valid API key. The API key will be automatically set when the server first connects to the database, and will use the same key until the database is reset.
+All requests must include a valid API key. The API key will be automatically set when the server first connects to the database, and will use the same key until the database is reset. The server will print your API key every time it starts up.
 
 Include the API key as in header called `X-TigerHacks-API-Key` when making the request to `api/register`. The server will respond appropriately if you did not pass a key at all, or you passed an incorrect key.
-
-## Shell
-
-To open the interactive shell, run
-```bash
-flask shell
-```
-
-By default, you will have access to the flask `app`.
-
-
-To run all tests, run
-```bash
-flask test
-```
-
-To run the linter, run
-```bash
-flask lint
-```
-The `lint` command will attempt to fix any linting/style errors in the code. If you only want to know if the code will pass CI and do not wish for the linter to make changes, add the `--check` argument.
-
