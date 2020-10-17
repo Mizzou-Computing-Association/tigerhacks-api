@@ -48,9 +48,9 @@ def register():
     register_query = s.sql.text("""
         INSERT INTO
         `registrations`
-            (`first_name`, `last_name`, `school`, `year`, `major`, `shirt_size`, `mailing_address`)
+            (`first_name`, `last_name`, `school`, `graduation_year`, `major`, `shirt_size`, `mailing_address`)
         VALUES
-            (:first_name, :last_name, :school, :year, :major, :shirt_size, :mailing_address);
+            (:first_name, :last_name, :school, :graduation_year, :major, :shirt_size, :mailing_address);
     """)
 
     try:
@@ -58,7 +58,7 @@ def register():
             "first_name": request.json["first_name"],
             "last_name": request.json["last_name"],
             "school": request.json["school"],
-            "year": request.json["year"],
+            "graduation_year": request.json["graduation_year"],
             "major": request.json["major"],
             "shirt_size": request.json["shirt_size"],
             "mailing_address":request.json["mailing_address"]
