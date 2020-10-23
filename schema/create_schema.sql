@@ -1,0 +1,2 @@
+-- source settings.sql;
+-- source registrations.sql;

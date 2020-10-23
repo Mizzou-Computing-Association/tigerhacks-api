@@ -31,8 +31,20 @@ def home():
         response=json.dumps({"status": "OK"}), status=200, mimetype="application/json"
     )
 
-@blueprint.route("/register", methods=["POST"])
+@blueprint.route("/register", methods=["POST", "OPTIONS"])
 def register():
+
+    if request.method == "OPTIONS":
+        response = Response(
+            response=json.dumps({"status": "OK"}), status=200, mimetype="application/json"
+        )
+        response.headers = {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
+            "Access-Control-Allow-Headers": "Content-Type, X-TigerHacks-API-Key"
+        }
+        return response
+
     try:
         if request.headers['X-TigerHacks-API-Key'] != current_app.api_key:
             logger.error("Unauthorized request")

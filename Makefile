@@ -11,8 +11,11 @@ default:
 install:
 	pip install -r requirements/dev.txt
 
-run:
+run-dev:
 	flask run --host=0.0.0.0
+
+run-prod:
+	flask run --host=23.227.167.35
 
 test:
 	flask test

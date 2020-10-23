@@ -14,7 +14,6 @@ from tigerhacks_api.utils import generate_api_key
 
 logger = logging.getLogger(__name__)
 
-
 def create_app(config_object="tigerhacks_api.settings"):
     """Create application factory, as explained here: http://flask.pocoo.org/docs/patterns/appfactories/.
 
@@ -41,8 +40,9 @@ def create_app(config_object="tigerhacks_api.settings"):
     logger.info("API keys configured")
 
     logger.info("Request logs will now take over.")
-    CORS(app)
+    cors = CORS(app)
     return app
+
 
 
 def register_extensions(app):
