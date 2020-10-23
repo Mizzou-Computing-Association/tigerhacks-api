@@ -60,20 +60,24 @@ def register():
     register_query = s.sql.text("""
         INSERT INTO
         `registrations`
-            (`first_name`, `last_name`, `school`, `graduation_year`, `major`, `shirt_size`, `mailing_address`)
+            (`first_name`, `last_name`, `phone_number`, `school`, `grade_level`, `major`, `shirt_size`, `mailing_address`, `birthdate`, `gender`, `graduation_year`);
         VALUES
-            (:first_name, :last_name, :school, :graduation_year, :major, :shirt_size, :mailing_address);
+            (:first_name, :last_name, :phone_number, :school, :grade_level, :major, :shirt_size, :mailing_address, :birthdate, :gender, :graduation_year);
     """)
 
     try:
         values = {
             "first_name": request.json["first_name"],
             "last_name": request.json["last_name"],
+            "phone_number": request.json["phone_number"],
             "school": request.json["school"],
-            "graduation_year": request.json["graduation_year"],
+            "grade_level": request.json["grade_level"],
             "major": request.json["major"],
             "shirt_size": request.json["shirt_size"],
-            "mailing_address":request.json["mailing_address"]
+            "mailing_address":request.json["mailing_address"],
+            "birthdate": request.json["birthdate"],
+            "gender": request.json["gender"],
+            "graduation_year": request.json["graduation_year"]
         }
     except KeyError as e:
         logger.error(e)
