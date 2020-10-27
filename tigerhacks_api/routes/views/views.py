@@ -57,12 +57,22 @@ def register():
             response=json.dumps({"status": "error", "msg": "No API key given"}), status=400, mimetype="application/json"
         )
 
+    given_email = request.json["email"]
+    duplicate_email_query = s.sql.text("""
+        SELECT COUNT(*) FROM registrations WHERE email LIKE :email
+    """)
+    email_already_exists = current_app.dbconn.execute(duplicate_email_query, email=given_email).fetchone()[0]
+    if email_already_exists == 1:
+        return Response(
+            response=json.dumps({"status": "error", "msg": "A record with that email already exists"}), status=500, mimetype="application/json"
+        )
+
     register_query = s.sql.text("""
         INSERT INTO
         `registrations`
-            (`first_name`, `last_name`, `phone_number`, `school`, `grade_level`, `major`, `shirt_size`, `mailing_address`, `birthdate`, `gender`, `graduation_year`);
+            (`first_name`, `last_name`, `phone_number`, `school`, `email`, `grade_level`, `major`, `shirt_size`, `mailing_address`, `birthdate`, `gender`, `graduation_year`)
         VALUES
-            (:first_name, :last_name, :phone_number, :school, :grade_level, :major, :shirt_size, :mailing_address, :birthdate, :gender, :graduation_year);
+            (:first_name, :last_name, :phone_number, :school, :email, :grade_level, :major, :shirt_size, :mailing_address, :birthdate, :gender, :graduation_year);
     """)
 
     try:
@@ -71,6 +81,7 @@ def register():
             "last_name": request.json["last_name"],
             "phone_number": request.json["phone_number"],
             "school": request.json["school"],
+            "email": request.json["email"],
             "grade_level": request.json["grade_level"],
             "major": request.json["major"],
             "shirt_size": request.json["shirt_size"],
